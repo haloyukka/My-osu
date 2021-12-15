@@ -1,5 +1,16 @@
 @startuml
 title シーケンス図
-アリス -> ボブ: リクエスト
+Program -> Environment: CurrentDirectory
+Program <-- Environment
+
+loop args
+    alt key = --tournament
+    else key = --debug-client-id
+        alt DebugUtils.IsDebugBuild = False
+        end
+        alt int.TryParse(val, out int clientID) = False
+        end
+    end
+end
 ボブ --> アリス: レスポンス
 @enduml
